@@ -7,6 +7,8 @@
 //
 
 #include "GameScene.h"
+#include "SimpleAudioEngine.h"
+#include "AppMacros.h"
 
 CCScene* GameScene::scene()
 {
@@ -23,5 +25,24 @@ bool GameScene::init()
         return false;
     }
     
+    //背景を追加する
+    createBackground();
+    
+    //ネコを表示する
+    createCat();
+    
+    //スコアと残り時間を表示する
+    createLabel();
+    
     return true;
+}
+
+void GameScene::createBackground()
+{
+    CCSize winSize = CCDirector::sharedDirector()->getWinSize();
+    
+    //背景を表示する
+    CCSprite* pBgUnder = CCSprite::create("game_bg.png");
+    pBgUnder->setPosition(ccp(winSize.width * 0.5, winSize.height * 0.5));
+    this->addChild(pBgUnder, kZOrder_Background, kTag_BackGround);
 }
